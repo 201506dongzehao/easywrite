@@ -1,0 +1,12 @@
+<?php print $this->fetch('admin/nav.phtml')?>
+
+<?php foreach($data['result'] as $results): ?>
+<div>
+    <h2 align="center"><?=$results['title']?></h2>
+
+    <h6 align="center">作者：<?=$results['author']?></h6>
+
+    <p class="lead"><?=$results['content']?></p>
+</div>
+
+<?php endforeach;?>

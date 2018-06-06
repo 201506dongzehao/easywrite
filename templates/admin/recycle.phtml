@@ -1,0 +1,45 @@
+
+<?php print $this->fetch('admin/nav.phtml')?>
+<div class="span10 content-right">
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <h4>数据列表</h4>
+            <div class="w">
+                <div class="span12">
+                    <table class="table table-condensed table-bordered table-hover tab">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>作者</th>
+                                <th>文档标题</th>
+                                <th>删除时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <?php foreach($data['result'] as $results): ?>
+                        <tr>
+                            <td><?=$results['id']?></td>
+                            <td><?=$results['username'] ?></td>
+                            <td><?=$results['title']?></td>
+                            <td><?=$results['create_time']?></td>
+                            <td>
+                                <a href="/recycle/delete/<?=$results['id']?>" onclick="javascript:return del();">删除</a>
+                                <a href="/recycle/reback/<?=$results['id']?>" onclick="javascript:return reb();">恢复</a>
+                            </td>
+                        </tr>
+<?php endforeach;?>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                    <div id="page" class="tr"></div>
+                </div>
+            </div>
+            
+
+           
+                
+        </div>
+    </div>
+</div>
+
+    
+
