@@ -1,0 +1,19 @@
+{
+    "require": {
+        "slim/slim": "^3.0",
+        "slim/php-view": "^2.2",
+        "slim/csrf": "^0.8.1",
+        "slim/twig-view": "^2.4",
+        "illuminate/pagination": "^5.5",
+        "illuminate/database": "^5.5",
+        "monolog/monolog": "^1.23",
+        "slim/pdo": "^1.10",
+        "illuminate/session": "^5.5"
+    },
+	"autoload": {
+            "psr-4": {
+                "sclass\\": "./vendor/sclass",
+                "Controller\\":"app/controller/"
+            }
+        }
+}
