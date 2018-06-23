@@ -5,6 +5,7 @@ namespace Controller\admin;
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 use \interop\Container\ContainerInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController
 {
@@ -19,12 +20,18 @@ class UserController
     {
         $sql='select * from users';
 	    $query = $this->ci->db->query($sql);
-	    $result = $query->fetchAll();
-	    $response=$this->ci->view->render($response,'admin/user.phtml',[
-		    'title'=>'用户管理',
-		    'result'=>$result,
-		    'response'=>$response
-        ]);
+        $result = $query->fetchAll();
+         //分页
+         $page=$request->getParam('page',1);
+         $perPage=$request->getParam('perPage',4);
+         $user=new LengthAwarePaginator(
+             $slicedNote=array_slice($result,($page-1)*$perPage,$perPage),
+             count($result),
+             $perPage,
+             $page,
+             ['path'=>$request->getUri()->getPath(),'query'=>$request->getParams()]
+         );
+	    $response=$this->ci->view->render($response,'admin/user.phtml',compact('user'));
         return $response;
     }
     //删除用户

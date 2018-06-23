@@ -18,25 +18,29 @@ class NoteController
     //文档管理首页
     public function index(Request $request,Response $response,$args)
     {
-        $sql='select * from mynote';
-	    $query = $this->ci->db->query($sql);
-        $result = $query->fetchAll();
-        //分页处理
-        // $page=$request->getParam('page',1);
-        // $perPage=$request->getParam('perPage',3);
-        // $note=new LengthAwarePaginator(
-        //     $slicedNote=array_slice($result,($page-1)*$perPage,$perPage),
-        //     count($result),
-        //     $perPage,
-        //     $request->getParam('page',1),
-        //     ['path'=>$request->getUri()->getPath(),'query'=>$request->getParams()]
-        // );
+        $dbNotes=$this->ci->db->query("select * from mynote")->fetchAll();
+        // $sql='select * from mynote';
 
-	    $response=$this->ci->view->render($response,'admin/mynote.phtml',[
-		    'title'=>'文档管理',
-		    'result'=>$result,
-		    'response'=>$response
-        ]);
+        // $page=new Page('',$sql,$_GET['page'],5,'?page=');
+        // $row=$page->list;
+        // dump($row);exit;
+
+        // echo $pagelist=$page->getPageList();
+	    // $query = $this->ci->db->query($sql);
+        // $result = $query->fetchAll();
+        //分页处理
+        $page=$request->getParam('page',1);
+        $perPage=$request->getParam('perPage',4);
+        $note=new LengthAwarePaginator(
+            $slicedNote=array_slice($dbNotes,($page-1)*$perPage,$perPage),
+            count($dbNotes),
+            $perPage,
+            $page,
+            ['path'=>$request->getUri()->getPath(),'query'=>$request->getParams()]
+        );
+        // dump($note);exit;
+        // $note->links('admin/test.phtml','$result');
+	    $response=$this->ci->view->render($response,'admin/mynote.phtml',compact('note'));
         return $response;
         // return $response->withJson([
         //     'data' =>$slicedNote,
@@ -87,12 +91,18 @@ class NoteController
     {
         $sql='select * from recycle';
 	    $query = $this->ci->db->query($sql);
-	    $result = $query->fetchAll();
-	    $response=$this->ci->view->render($response,'admin/recycle.phtml',[
-		    'title'=>'回收站管理',
-		    'result'=>$result,
-		    'response'=>$response
-        ]);
+        $result = $query->fetchAll();
+        //分页
+        $page=$request->getParam('page',1);
+        $perPage=$request->getParam('perPage',4);
+        $recyclenote=new LengthAwarePaginator(
+            $slicedNote=array_slice($result,($page-1)*$perPage,$perPage),
+            count($result),
+            $perPage,
+            $page,
+            ['path'=>$request->getUri()->getPath(),'query'=>$request->getParams()]
+        );
+	    $response=$this->ci->view->render($response,'admin/recycle.phtml',compact('recyclenote'));
         return $response;
     }
     //删除回收站数据
@@ -132,12 +142,18 @@ class NoteController
     {
         $sql="select * from share";
         $query = $this->ci->db->query($sql);
-	    $result = $query->fetchAll();
-	    $response=$this->ci->view->render($response,'admin/share.phtml',[
-		    'title'=>'分享文档管理',
-		    'result'=>$result,
-		    'response'=>$response
-        ]);
+        $result = $query->fetchAll();
+         //分页
+         $page=$request->getParam('page',1);
+         $perPage=$request->getParam('perPage',4);
+         $sharenote=new LengthAwarePaginator(
+             $slicedNote=array_slice($result,($page-1)*$perPage,$perPage),
+             count($result),
+             $perPage,
+             $page,
+             ['path'=>$request->getUri()->getPath(),'query'=>$request->getParams()]
+         );
+	    $response=$this->ci->view->render($response,'admin/share.phtml',compact('sharenote'));
         return $response;
     }
     //删除分享文档

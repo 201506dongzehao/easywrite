@@ -40,13 +40,21 @@ class IndexController
         $password=$request->getParsedBody()['password'];
         $sql="select * from adminuser where username='$username' and password='$password'";
         $query=$this->ci->db->query($sql);
-        if($query)
+        $result = $query->fetchColumn();
+        if(!empty($result))
         {
+            $_SESSION['username']=$username;
             // session('loginedUser',$username);
             echo "<script>window.location.href = '/admin/index';</script>";
         }
         else{
             echo "<script>alert('用户名或密码错误！');window.location.href = '/admin/adminlogin';</script>";
         }
+    }
+    //退出登录
+    public function loginout(Request $request,Response $response,$args)
+    {
+        unset($_SESSION['username']);
+        echo "<script>window.location.href = '/admin/adminlogin';</script>";
     }
 }
