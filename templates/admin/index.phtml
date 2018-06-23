@@ -10,8 +10,8 @@
             <tr>
               <td>管理员个数:</td>
               <td><?=$count?>人</td>
-              <td>服务器软件:</td>
-              <td>Apache/2.4.10 (Win32) OpenSSL/1.0.1i mod_fcgid/2.3.9</td>
+              <td>当前登录管理员:</td>
+              <td><?php echo $_SESSION['username'];?></td>
             </tr>
             <tr>
               <td>浏览器:</td>

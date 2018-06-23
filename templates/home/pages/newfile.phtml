@@ -12,10 +12,11 @@
     <title>简·记 云笔记</title>
 
     <link rel="stylesheet" href="/css/home/bootstrap.min.css" />     
-<link rel="stylesheet" type="text/css" href="/css/home/isotope.css" media="screen" />   
-<link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
-<link rel="stylesheet" type="text/css" href="/css/home/da-slider.css" />
-<link rel="stylesheet" href="/css/home/styles.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/home/isotope.css" media="screen" />   
+    <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/css/home/da-slider.css" />
+    <link rel="stylesheet" href="/css/home/styles.css"/>
+    <link rel="stylesheet" href="/css/home/self.css"/>
 
 
     <!-- Bootstrap Core CSS -->
@@ -145,9 +146,9 @@
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" id="findtitle" placeholder="搜索">
+                            <input type="text" class="form-control" placeholder="搜索">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="find">
+                                <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -170,11 +171,10 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 导入<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/text">导入文件</a>
-
+                                <a href="flot.html">导入文件</a>
                             </li>
                             <li>
-                                <a href="/file">导入文件夹</a>
+                                <a href="morris.html">导入文件夹</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level
@@ -183,7 +183,7 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> 我的文件夹<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-								<a href="#">我的资源<span class="fa arrow"></span></a>
+                                <a href="#">我的资源<span class="fa arrow"></span></a>
                                 <?php
                                     if(!empty($_SESSION['username'])){
                                         foreach($result1 as $results){
@@ -209,6 +209,7 @@
                                         }
                                     }
                                 ?>
+					
                             </li>
                             <!-- <li>
                                 <a href="/button">我的文档</a>
@@ -228,52 +229,33 @@
 
    
     <!-- /.row -->
-	<div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">欢迎使用简·记云笔记</h1>
+    <div id="page-wrapper" style="background-image: url('images/file.png');background-repeat: repeat-y;">
+        <div class="row" ">
+            <div class="col-lg-12" style="margin-top: 80px;">
+                    请选择父文件夹：
+                    <select id="f_name">
+                    	<option></option>
+                        <?php foreach ($result1 as $val): ?>
+                            <option><?=$val['f_name']?></option>
+                        <?php endforeach ?>
+                    </select> 
+                <br>    
+                <br>
+                <br>              
+                <!-- <h1 class="page-header">欢迎使用简·记云笔记</h1> -->
+                请输入文件夹名称：<input type="text" name="filename" id="filename" style="width: 30%;height: 40px;font-size: 18px;margin-top: 30px;" placeholder="&nbsp;简·记">
             </div>
             <!-- /.col-lg-12 -->
         </div>
+            <br>    
+            <br>
+            <br>  
 
-        <!-- /.row -->
-	<section id="aboutUs" class="page-section pDark pdingBtm30">
-	<div class="container">
-	    <div class="heading text-center" style="margin-left: -150px;">
-			<!-- Heading -->
-			<h2>关于 我们</h2>								 
-			<p>云笔记是一款跨平台的简单快速的个人记事备忘工具，操作界面  
-			简洁高效。例如：
-			</p>
-		</div>
-	
-		<div class="row" style="margin-left: 100px;">
-			<div class="col-md-3 col-sm-6">	
-	            <div class="tray text-center">											
-					<h3><i class="fa fa-desktop color"></i> &nbsp;网页版操作</h3>
-					<!-- Paragraph -->
-					<p>电脑版操作，界面简洁，使用方便，实时保存，防止文件丢失。支持上传文件，分享文件等功能。</p>										
-				</div>
-            </div>
-			<div class="col-md-3 col-sm-6">	
-		        <div class="tray text-center">											
-					<!-- Heading -->
-					<h3><i class="fa fa-cloud color"></i> &nbsp;云端存储</h3>
-					<!-- Paragraph -->
-					<p>拥有云端同步功能，可直接创建新笔记。通过登录云笔记网站可直接编辑个人记事，实现协同操作。</p> 										
-				</div>
-            </div>
-            <div class="col-md-3 col-sm-6">	
-		        <div class="tray text-center">											
-					<!-- Heading -->
-					<h3><i class="fa fa-cloud color"></i> &nbsp;分享文件</h3>
-					<!-- Paragraph -->
-					<p>支持分享文件，可通过微信、QQ、微博等多种渠道进行分享。支持下载到本地，发送到手机。</p> 										
-				</div>
-            </div>
-		</div>
-	<!--/.container-->
-	</section>
+        <button id="ccc" type="submit" class="btn btn-default" style="float: right;background: #4876FF;margin-top: 40px;margin-right:50px;color: #FFFFFF;">新建文件夹</button>
+    </div>
+</div>
+<!-- /#page-wrapper -->
+
 </div>
 <!-- /#wrapper -->
 
@@ -293,15 +275,23 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
+
 <script>
-    $('#find').click(function(){
+    $('#ccc').click(function(){
         // alert('a');
+        var name=$('#f_name').val();
+        alert(name);
         $.ajax({
             type:'post',
-            url:'/find',
+            url:'/donewfile',
             dataType:'text',
             data:{
-                findstr:$('#find').val(),
+                pre_file:$('#f_name').val(),
+                name:$('#filename').val(),
             },
             success:function(data){
                 console.log(data);
@@ -315,7 +305,3 @@
         });
     });
 </script>
-</body>
-
-</html>
-

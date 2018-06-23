@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/js/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
 <link rel="stylesheet" type="text/css" href="/css/home/da-slider.css" />
 <link rel="stylesheet" href="/css/home/styles.css"/>
+<link rel="stylesheet" href="/css/home/self.css"/>
 
 
     <!-- Bootstrap Core CSS -->
@@ -145,9 +146,9 @@
                 <ul class="nav" id="side-menu">
                     <li class="sidebar-search">
                         <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" id="findtitle" placeholder="搜索">
+                            <input type="text" class="form-control" placeholder="搜索">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" id="find">
+                                <button class="btn btn-default" type="button">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </span>
@@ -170,11 +171,10 @@
                         <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 导入<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="/text">导入文件</a>
-
+                                <a href="flot.html">导入文件</a>
                             </li>
                             <li>
-                                <a href="/file">导入文件夹</a>
+                                <a href="morris.html">导入文件夹</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level
@@ -183,7 +183,7 @@
                         <a href="#"><i class="fa fa-wrench fa-fw"></i> 我的文件夹<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-								<a href="#">我的资源<span class="fa arrow"></span></a>
+                                <a href="#">我的资源<span class="fa arrow"></span></a>
                                 <?php
                                     if(!empty($_SESSION['username'])){
                                         foreach($result1 as $results){
@@ -209,6 +209,7 @@
                                         }
                                     }
                                 ?>
+					
                             </li>
                             <!-- <li>
                                 <a href="/button">我的文档</a>
@@ -228,52 +229,29 @@
 
    
     <!-- /.row -->
-	<div id="page-wrapper">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">欢迎使用简·记云笔记</h1>
-            </div>
-            <!-- /.col-lg-12 -->
+    <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- <h1 class="page-header">欢迎使用简·记云笔记</h1> -->
+            <input type="text" name="title" id="title" style="width: 100%;height: 40px;font-size: 18px;margin-top: 40px;" 
+            value="<?php foreach ($note as $n):?><?=$n['title']?><?php endforeach;?>">
+            <input type="hidden" name="noteid" id="noteid" value="<?php foreach ($note as $n):?><?=$n['id']?><?php endforeach;?>">
         </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- 插入编辑器 -->
+    <div id="editor">
+        <p>
+            <?php foreach ($note as $n):?>
+                <?=$n['content']?>
+            <?php endforeach;?>
+        </p>
+    </div>
+    <button id="ccc" type="submit" class="btn btn-default" style="float: right;background: #4876FF;margin-top: 6px;color: #FFFFFF;">保存</button>
+</div>
+</div>
+<!-- /#page-wrapper -->
 
-        <!-- /.row -->
-	<section id="aboutUs" class="page-section pDark pdingBtm30">
-	<div class="container">
-	    <div class="heading text-center" style="margin-left: -150px;">
-			<!-- Heading -->
-			<h2>关于 我们</h2>								 
-			<p>云笔记是一款跨平台的简单快速的个人记事备忘工具，操作界面  
-			简洁高效。例如：
-			</p>
-		</div>
-	
-		<div class="row" style="margin-left: 100px;">
-			<div class="col-md-3 col-sm-6">	
-	            <div class="tray text-center">											
-					<h3><i class="fa fa-desktop color"></i> &nbsp;网页版操作</h3>
-					<!-- Paragraph -->
-					<p>电脑版操作，界面简洁，使用方便，实时保存，防止文件丢失。支持上传文件，分享文件等功能。</p>										
-				</div>
-            </div>
-			<div class="col-md-3 col-sm-6">	
-		        <div class="tray text-center">											
-					<!-- Heading -->
-					<h3><i class="fa fa-cloud color"></i> &nbsp;云端存储</h3>
-					<!-- Paragraph -->
-					<p>拥有云端同步功能，可直接创建新笔记。通过登录云笔记网站可直接编辑个人记事，实现协同操作。</p> 										
-				</div>
-            </div>
-            <div class="col-md-3 col-sm-6">	
-		        <div class="tray text-center">											
-					<!-- Heading -->
-					<h3><i class="fa fa-cloud color"></i> &nbsp;分享文件</h3>
-					<!-- Paragraph -->
-					<p>支持分享文件，可通过微信、QQ、微博等多种渠道进行分享。支持下载到本地，发送到手机。</p> 										
-				</div>
-            </div>
-		</div>
-	<!--/.container-->
-	</section>
 </div>
 <!-- /#wrapper -->
 
@@ -293,15 +271,36 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="/dist/js/sb-admin-2.js"></script>
+
+</body>
+
+</html>
+
+
+
+    <!-- 注意， 只需要引用 JS，无需引用任何 CSS ！！！-->
+    <script type="text/javascript" src="/wangEditor-3.1.1/release/wangEditor.min.js"></script>
+    <script type="text/javascript">
+        var E = window.wangEditor
+        var editor = new E(document.getElementById('editor'))
+        // 或者 var editor = new E( document.getElementById('editor') )
+        editor.create()
+    </script>
+    <!-- 插入编辑器 -->
+    <!--  <div class="ccc" style="width: 6%;height: 100%;border: none;color: #FFFFFF;font-size: 16px;background: #1A94E6;cursor: pointer;text-align: center;padding-top: 6px;margin-top: 6px;float: right;">保存</div> -->
+
 <script>
-    $('#find').click(function(){
+    $('#ccc').click(function(){
         // alert('a');
+        var noteid = $('#noteid').val();
+        alert('更改笔记');
         $.ajax({
             type:'post',
-            url:'/find',
+            url:'/dochangenote/'+noteid,
             dataType:'text',
             data:{
-                findstr:$('#find').val(),
+                title:$('#title').val(),
+                note:$('#editor').find('p').text(),
             },
             success:function(data){
                 console.log(data);
@@ -315,7 +314,3 @@
         });
     });
 </script>
-</body>
-
-</html>
-

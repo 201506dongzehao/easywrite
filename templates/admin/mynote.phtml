@@ -15,7 +15,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <?php foreach($data['result'] as $results): ?>
+                        <?php foreach($data['note'] as $results): ?>
                         <tr>
                             <td><?=$results['id'] ?></td>
                             <td><?=$results['author']?></td>
@@ -31,8 +31,11 @@
                         <tbody id="tbody"></tbody>
                     </table>
 
-                    <div id="page" class="tr"></div>
-                </div>
+                  <?php 
+                        echo '<div id="page" class="tr">';
+                        echo $note->links('pagination/page.phtml');
+                        echo '</div>';                   
+                   ?>
             </div>
                 </div>
                 

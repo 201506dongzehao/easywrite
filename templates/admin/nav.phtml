@@ -20,10 +20,13 @@
             <li><a class="loginout" href="/home/index">前台访问</a></li>
             <li>
                 <img src="/images/32/client.png" />&nbsp;&nbsp;欢迎您,
+                <?php 
+                    echo $_SESSION['username'];
+                ?>
             </li>
          
             <li>
-                <img src="/images/32/200.png" />&nbsp;&nbsp;<a class="loginout" href="#" onClick="if(!confirm('是否确认退出？'))return false;">退出</a>
+                <img src="/images/32/200.png" />&nbsp;&nbsp;<a class="loginout" href="/admin/loginout" onClick="if(!confirm('是否确认退出？'))return false;">退出</a>
             </li>
 
         </ul>
