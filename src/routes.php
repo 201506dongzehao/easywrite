@@ -19,9 +19,29 @@ $app->get('/noteindex','Controller\home\HomeController:noteindex');
 //新建笔记
 $app->get('/newnote','Controller\home\HomeController:newnote');
 $app->post('/donewnote','Controller\home\HomeController:donewnote');
+//删除笔记
+$app->get('/delnote/{id}','Controller\home\HomeController:delnote');
+
+//新建文件夹
+$app->get('/newfile','Controller\home\HomeController:newfile');
+$app->post('/donewfile','Controller\home\HomeController:donewfile');
 
 $app->get('/manageType','Controller\home\NoteController:manageType');
 $app->post('/contact','Controller\home\NoteController:contact');
+//我的资源
+// $app->get('/mynote','Controller\home\HomeController:mynote');
+$app->get('/mynoteindex/{id}','Controller\home\HomeController:mynoteindex');
+
+//回收站
+$app->get('/noterecycle','Controller\home\HomeController:noteRecycle');
+//删除回收站数据
+$app->get('/noterecycle/delete/{id}','Controller\home\HomeController:deleteRecycleNote');
+//恢复回收站数据
+$app->get('/rebackrecycle/{id}','Controller\home\HomeController:rebackRecycleNote');
+
+//修改笔记
+$app->get('/changenote/{id}','Controller\home\HomeController:changenote');
+$app->post('/dochangenote/{id}','Controller\home\HomeController:dochangenote');
 
 
 
@@ -34,6 +54,8 @@ $app->get('/admin/index','Controller\admin\IndexController:index');
 $app->get('/admin/user','Controller\admin\UserController:index');
 //管理员登录
 $app->get('/admin/adminlogin','Controller\admin\IndexController:login');
+//管理员注销
+$app->get('/admin/loginout','Controller\admin\IndexController:loginout');
 $app->post('/admin/dologin','Controller\admin\IndexController:dologin');
 //用户删除
 $app->get('/user/delete/{id}','Controller\admin\UserController:deleteUser');
